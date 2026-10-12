@@ -3127,6 +3127,10 @@ function wireMapsLinks(){
     return;
   }
 
+  // 1. Lock scroll immediately when the page loads
+  document.body.style.overflow = "hidden";
+  window.scrollTo(0, 0);
+
   function setState(isPlaying){
     if (!btn) return;
     btn.setAttribute("aria-pressed", String(isPlaying));
@@ -3136,14 +3140,18 @@ function wireMapsLinks(){
 
   // Triggered when user clicks "Open Invitation"
   openBtn.addEventListener("click", () => {
-    // 1. Fade out overlay
+    // 2. Unlock scroll and force position to top (home) instantly
+    document.body.style.overflow = "";
+    window.scrollTo(0, 0);
+
+    // 3. Fade out overlay
     overlay.style.opacity = "0";
     setTimeout(() => {
       overlay.style.visibility = "hidden";
       overlay.remove();
     }, 800);
 
-    // 2. Play music using user gesture
+    // 4. Play music using user gesture
     audio.volume = 0.6;
     audio.play()
       .then(() => setState(true))

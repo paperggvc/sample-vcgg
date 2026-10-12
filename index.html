@@ -3116,54 +3116,50 @@ function wireMapsLinks(){
    it, the button still toggles play/pause normally on click.
    ============================================================ */
 
-(function music(){
+(function musicAndOverlay(){
+  const audio = document.getElementById("weddingMusic");
+  const btn = document.getElementById("musicToggle");
+  const overlay = document.getElementById("env-overlay");
+  const openBtn = document.getElementById("openBtn");
 
-  const audio =
-    document.getElementById("weddingMusic");
-
-  const btn =
-    document.getElementById("musicToggle");
-
-  if(!audio || !btn)
-    return;
+  if(!audio || !btn || !overlay || !openBtn) return;
 
   function setState(isPlaying){
-
-    btn.setAttribute(
-      "aria-pressed",
-      String(isPlaying)
-    );
-
+    btn.setAttribute("aria-pressed", String(isPlaying));
+    const iconSpan = btn.querySelector(".music-toggle__icon");
+    if(iconSpan) iconSpan.textContent = isPlaying ? "♫" : "🔇";
   }
 
-  const tryAutoplay = audio.play();
+  // Triggered when user clicks "Open Invitation" on the overlay
+  openBtn.addEventListener("click", () => {
+    // 1. Fade out and remove the opening overlay
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+      overlay.style.visibility = "hidden";
+      overlay.remove();
+    }, 800);
 
-  if(tryAutoplay && typeof tryAutoplay.then === "function"){
-
-    tryAutoplay
+    // 2. Play music seamlessly using the genuine user click gesture
+    audio.volume = 0.6;
+    audio.play()
       .then(() => setState(true))
-      .catch(() => setState(false));
+      .catch((err) => {
+        console.warn("Playback prevented:", err);
+        setState(false);
+      });
+  });
 
-  }
-
+  // Manual toggle button behavior if clicked later
   btn.addEventListener("click", () => {
-
     if(audio.paused){
-
       audio.play()
         .then(() => setState(true))
         .catch(() => setState(false));
-
-    }else{
-
+    } else {
       audio.pause();
-
       setState(false);
-
     }
-
   });
-
 })();
 
 

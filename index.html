@@ -3122,24 +3122,28 @@ function wireMapsLinks(){
   const overlay = document.getElementById("env-overlay");
   const openBtn = document.getElementById("openBtn");
 
-  if(!audio || !btn || !overlay || !openBtn) return;
+  if (!audio || !overlay || !openBtn) {
+    console.warn("Missing overlay or audio elements");
+    return;
+  }
 
   function setState(isPlaying){
+    if (!btn) return;
     btn.setAttribute("aria-pressed", String(isPlaying));
     const iconSpan = btn.querySelector(".music-toggle__icon");
     if(iconSpan) iconSpan.textContent = isPlaying ? "♫" : "🔇";
   }
 
-  // Triggered when user clicks "Open Invitation" on the overlay
+  // Triggered when user clicks "Open Invitation"
   openBtn.addEventListener("click", () => {
-    // 1. Fade out and remove the opening overlay
+    // 1. Fade out overlay
     overlay.style.opacity = "0";
     setTimeout(() => {
       overlay.style.visibility = "hidden";
       overlay.remove();
     }, 800);
 
-    // 2. Play music seamlessly using the genuine user click gesture
+    // 2. Play music using user gesture
     audio.volume = 0.6;
     audio.play()
       .then(() => setState(true))
@@ -3149,17 +3153,19 @@ function wireMapsLinks(){
       });
   });
 
-  // Manual toggle button behavior if clicked later
-  btn.addEventListener("click", () => {
-    if(audio.paused){
-      audio.play()
-        .then(() => setState(true))
-        .catch(() => setState(false));
-    } else {
-      audio.pause();
-      setState(false);
-    }
-  });
+  // Manual toggle button behavior
+  if (btn) {
+    btn.addEventListener("click", () => {
+      if(audio.paused){
+        audio.play()
+          .then(() => setState(true))
+          .catch(() => setState(false));
+      } else {
+        audio.pause();
+        setState(false);
+      }
+    });
+  }
 })();
 
 

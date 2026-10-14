@@ -1708,10 +1708,61 @@ fieldset{
 
 <body>
 <!-- ── INTERACTIVE OPENING OVERLAY ── -->
-<div id="env-overlay" style="position:fixed;inset:0;background:#2F2A26;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#FDFBF7;text-align:center;padding:20px;transition:opacity 0.8s ease,visibility 0.8s ease;">
-  <div style="font-family:var(--serif);font-size:1.8rem;margin-bottom:1rem;color:#B79A67;">Gargi &amp; Vishnu</div>
-  <p style="font-size:0.9rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem;opacity:0.8;">You are warmly invited</p>
-  <button id="openBtn" style="background:#B79A67;color:#2F2A26;border:none;padding:12px 28px;font-family:var(--sans);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;border-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,0.3);">Open Invitation ✦</button>
+<div id="env-overlay" style="position:fixed;inset:0;background:radial-gradient(circle at center, #2C1B1B 0%, #0D0808 100%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#F5EDE4;text-align:center;padding:32px;overflow:hidden;transition:opacity 0.9s cubic-bezier(0.22,0.61,0.36,1), transform 0.9s cubic-bezier(0.22,0.61,0.36,1);">
+  
+  <!-- Outer Editorial Fine-Line Gold Border -->
+  <div style="position:absolute; inset:clamp(16px, 3vw, 28px); border: 1px solid rgba(183,154,103,0.22); pointer-events:none; z-index:1;"></div>
+  <div style="position:absolute; inset:clamp(20px, 3.4vw, 34px); border: 1px solid rgba(183,154,103,0.1); pointer-events:none; z-index:1;"></div>
+
+  <!-- Ambient Golden Glow -->
+  <div style="position:absolute;width:500px;height:500px;background:radial-gradient(circle, rgba(183,154,103,0.14) 0%, transparent 65%);border-radius:50%;pointer-events:none;animation: ambientPulse 7s ease-in-out infinite; z-index:1;"></div>
+
+  <!-- Content Container -->
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;max-width:460px;width:100%; padding: 20px;">
+    
+    <!-- Grand Header -->
+    <p style="font-family:var(--sans);font-size:0.65rem;letter-spacing:0.48em;text-transform:uppercase;color:#C8A96E;margin-bottom:1.6rem;opacity:0.95;text-align:center;width:100%;">We're Getting Married</p>
+    
+    <!-- Names Layout -->
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; margin-bottom:1.2rem;">
+      <span style="font-family:var(--serif);font-size:clamp(2.8rem, 8.5vw, 4.2rem);font-weight:300;color:#FDFBF7;line-height:0.95;letter-spacing:0.05em; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">Gargi</span>
+      <span style="font-family:var(--serif);font-style:italic;color:#C8A96E;font-size:clamp(1.6rem, 5.5vw, 2.4rem);line-height:1.2;margin:0.2em 0; text-shadow: 0 2px 10px rgba(0,0,0,0.4);">&amp;</span>
+      <span style="font-family:var(--serif);font-size:clamp(2.8rem, 8.5vw, 4.2rem);font-weight:300;color:#FDFBF7;line-height:0.95;letter-spacing:0.05em; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">Vishnu</span>
+    </div>
+
+    <!-- Breathing Decorative Separator -->
+    <div style="display:flex; align-items:center; gap:14px; margin:1rem 0 1.6rem; opacity:0.85; animation: lineBreathe 4s ease-in-out infinite;">
+      <span style="width:45px; height:1px; background:linear-gradient(to right, transparent, #C8A96E);"></span>
+      <span style="font-size:0.75rem; color:#C8A96E; letter-spacing: 2px;">✦</span>
+      <span style="width:45px; height:1px; background:linear-gradient(to left, transparent, #C8A96E);"></span>
+    </div>
+
+    <!-- Quote -->
+    <p style="font-family:var(--serif);font-style:italic;font-size:1.12rem;color:rgba(245,237,228,0.85);margin-bottom:2.6rem;line-height:1.65; max-width: 380px; letter-spacing: 0.02em;">
+      "Turns out, annoying each other forever sounds pretty good"
+    </p>
+
+    <!-- Open Button -->
+    <button id="openBtn" style="position:relative;background:rgba(200,169,110,0.08);color:#FDFBF7;border:1px solid rgba(200,169,110,0.7);padding:16px 38px;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;cursor:pointer;border-radius:50px;transition:all 0.5s cubic-bezier(0.22,0.61,0.36,1);box-shadow:0 6px 24px rgba(0,0,0,0.45); animation: btnPulse 3.5s ease-in-out infinite;" onmouseover="this.style.background='#C8A96E';this.style.color='#2C1B1B';this.style.borderColor='#C8A96E';" onmouseout="this.style.background='rgba(200,169,110,0.08)';this.style.color='#FDFBF7';this.style.borderColor='rgba(200,169,110,0.7)';">
+      Join our celebration
+    </button>
+  </div>
+
+  <!-- Grand Animations -->
+  <style>
+    @keyframes lineBreathe {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+    @keyframes ambientPulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.15); opacity: 0.9; }
+    }
+    @keyframes btnPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(200,169,110,0.35); }
+      50% { box-shadow: 0 0 0 12px rgba(200,169,110,0); }
+    }
+  </style>
 </div>
 <!-- ADD THIS AUDIO TAG RIGHT HERE -->
     <audio id="bg-music" src="https://raw.githubusercontent.com/vishnugargi/vishnugargi.github.io/main/wedding-music.mp3" preload="auto" loop muted></audio>

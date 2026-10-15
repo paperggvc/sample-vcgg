@@ -62,9 +62,9 @@
   --petal-opacity:.5;
 
   /* NAME GOLD EFFECT – deeper and brighter warm golds */
-  --name-gold-1:#8F6834;
-  --name-gold-2:#B08A4A;
-  --name-gold-3:#D0AE68;
+  --name-gold-1:#C5A059;
+  --name-gold-2:#E3C384;
+  --name-gold-3:#FDF0CD;
 
   /* MUSIC BUTTON */
   --music-bg:rgba(253,251,247,0.85);
@@ -456,26 +456,25 @@ p{
 
 .hero{
   position:relative;
-
   width:100%;
   min-height:100svh;
   min-height:100vh;
-
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-
   text-align:center;
-
   padding:
     clamp(96px,14vh,140px)
     var(--gutter)
     clamp(72px,10vh,96px);
-
   overflow:hidden;
 
-  background:var(--hero-bg);
+  /* Upgraded background: rich plum-brown vignette with a warm center core */
+  background: 
+    radial-gradient(circle at 50% 30%, rgba(95, 63, 63, 0.6) 0%, transparent 60%),
+    radial-gradient(circle at 50% 80%, rgba(30, 18, 18, 0.8) 0%, rgba(45, 30, 30, 1) 100%),
+    var(--hero-bg);
   color:var(--hero-text-light);
 }
 
@@ -568,21 +567,31 @@ p{
 }
 
 /* NAME GOLD EFFECT — robust with fallback colour */
+:root {
+  /* Brighter, high-contrast gold variables for dark backgrounds */
+  --name-gold-1: #C5A059;
+  --name-gold-2: #E3C384;
+  --name-gold-3: #FDF0CD;
+}
+
 .name-gold{
   background-image:linear-gradient(
-    120deg,
-    var(--name-gold-3),
-    var(--name-gold-1) 30%,
+    135deg,
+    var(--name-gold-3) 0%,
+    var(--name-gold-1) 25%,
     var(--name-gold-2) 50%,
-    var(--name-gold-1) 70%,
-    var(--name-gold-3)
+    var(--name-gold-1) 75%,
+    var(--name-gold-3) 100%
   );
-  background-size:300% 100%;
+  background-size:400% 100%;
   -webkit-background-clip:text;
   background-clip:text;
   color:var(--name-gold-1); /* fallback for Safari */
   -webkit-text-fill-color:transparent;
-  animation:name-breathe 7s ease-in-out infinite;
+  animation:name-breathe 8s ease-in-out infinite;
+  
+  /* Lifts the text off the dark background with a warm luminous halo */
+  text-shadow: 0 4px 24px rgba(183, 154, 103, 0.3);
 }
 
 @keyframes name-breathe{
@@ -2346,7 +2355,7 @@ fieldset{
 
 
       <div class="map-holder">
-        Map
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2167.0956156206776!2d77.08063806377248!3d8.311767530787868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05a99f522e596b%3A0x9a36446dad159f78!2sIsola%20Di%20Cocco!5e1!3m2!1sen!2som!4v1792053894624!5m2!1sen!2som" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
 
     </div>
@@ -2457,7 +2466,7 @@ fieldset{
 
 
       <div class="map-holder">
-        Map
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1770.8983481526607!2d81.85190044943198!3d25.445575050159718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399acb1a8fa99e27%3A0x9e1cd609cb091294!2sKGF%20Villa%20Banquet%20Hall!5e1!3m2!1sen!2som!4v1792055364933!5m2!1sen!2som" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
 
     </div>
@@ -2862,15 +2871,15 @@ const CONFIG = {
   MAPS_URL:"https://maps.app.goo.gl/18eui9E2VhmTAZh6A",
 
   /* RECEPTION DETAILS — edit these five values once confirmed */
-  receptionDate:"[Reception Date]",
+  receptionDate:"7 December 2026",
 
   receptionTime:"[Reception Time]",
 
-  receptionVenue:"[Reception Venue]",
+  receptionVenue:"KGF Villa Banquet Hall",
 
-  receptionArea:"[Reception Location]",
+  receptionArea:"George Town, Prayagraj, Uttar Pradesh",
 
-  RECEPTION_MAPS_URL:"RECEPTION_GOOGLE_MAPS_URL_HERE",
+  RECEPTION_MAPS_URL:"https://maps.app.goo.gl/UtNQyXzjamiggY3j7",
 
   RSVP_ENDPOINT:"RSVP_ENDPOINT_HERE"
 
@@ -3111,7 +3120,7 @@ function wireMapsLinks(){
       }
 
       p.el.style.transform =
-        `translate(${p.x}px, ${p.y}px) rotate(${p.rot}deg)`;
+        `translate(${p.x}px, p.ypx)rotate({p.rot}deg)`;
       p.el.style.opacity = opacity;
 
     }
@@ -3946,3 +3955,5 @@ wireMapsLinks();
 
 </body>
 </html>
+
+

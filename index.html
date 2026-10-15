@@ -3042,8 +3042,8 @@ function wireMapsLinks(){
   if(!container || reduceMotion) return;
 
   const rect = container.getBoundingClientRect();
-  let W = rect.width;
-  let H = rect.height;
+  let W = rect.width || window.innerWidth;
+  let H = rect.height || window.innerHeight;
 
   const colors = [
     getComputedStyle(document.documentElement)
@@ -3056,18 +3056,16 @@ function wireMapsLinks(){
 
   const petals = [];
 
-  /* Create PETAL_COUNT petal elements with randomised properties */
-
   for(let i = 0; i < PETAL_COUNT; i++){
 
     const el = document.createElement("span");
     el.className = "petal";
 
-    const size = Math.random() * 8 + 8;          // 8–16 px
+    const size = Math.random() * 8 + 8;
     const w = size;
     const h = size * 1.3;
 
-    const baseOpacity = Math.random() * 0.3 + 0.25; // 0.25–0.55
+    const baseOpacity = Math.random() * 0.3 + 0.25;
 
     el.style.width  = w + "px";
     el.style.height = h + "px";
@@ -3080,8 +3078,8 @@ function wireMapsLinks(){
       el,
       x: Math.random() * W,
       y: -h * 2 - Math.random() * 100,
-      speed: Math.random() * 0.6 + 0.25,        // 0.25–0.85 px per frame
-      drift: (Math.random() - 0.5) * 0.4,       // horizontal drift
+      speed: Math.random() * 0.6 + 0.25,
+      drift: (Math.random() - 0.5) * 0.4,
       rot: Math.random() * 360,
       rotSpeed: (Math.random() - 0.5) * 0.8,
       size: w,
@@ -3094,13 +3092,17 @@ function wireMapsLinks(){
 
   function animate(){
 
+    // Fallback checks added here for mobile viewport safety
+    const r = container.getBoundingClientRect();
+    W = r.width || window.innerWidth;
+    H = r.height || window.innerHeight;
+
     for(const p of petals){
 
       p.y += p.speed;
       p.x += p.drift + Math.sin(p.y * 0.015 + p.phase) * 0.3;
       p.rot += p.rotSpeed;
 
-      /* Fade in near the top, fade out before the bottom (Countdown) */
       let opacity;
       if(p.y < 0){
         opacity = 0;
@@ -3112,15 +3114,14 @@ function wireMapsLinks(){
         opacity = p.baseOpacity;
       }
 
-      /* Reset when fully off the bottom */
-      if(p.y > H + 50 || opacity <= 0 && p.y > H * 0.9){
+      if(p.y > H + 50 || (opacity <= 0 && p.y > H * 0.9)){
         p.y = -p.size * 2 - Math.random() * 80;
         p.x = Math.random() * W;
         opacity = 0;
       }
 
       p.el.style.transform =
-        `translate(${p.x}px, p.ypx)rotate({p.rot}deg)`;
+        `translate(${p.x}px, ${p.y}px) rotate(${p.rot}deg)`;
       p.el.style.opacity = opacity;
 
     }
@@ -3128,28 +3129,16 @@ function wireMapsLinks(){
     raf = requestAnimationFrame(animate);
   }
 
-  /* Size observer to update W/H on resize */
-
   if(typeof ResizeObserver !== "undefined"){
     new ResizeObserver(() => {
       const r = container.getBoundingClientRect();
-      W = r.width;
-      H = r.height;
+      W = r.width || window.innerWidth;
+      H = r.height || window.innerHeight;
     }).observe(container);
-  }else{
-    window.addEventListener("resize", () => {
-      const r = container.getBoundingClientRect();
-      W = r.width;
-      H = r.height;
-    });
   }
 
-  /* Start when hero is in view, stop when out of view for performance */
-
   if("IntersectionObserver" in window){
-
     const heroEl = document.querySelector(".hero");
-
     const io = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if(entry.isIntersecting){
@@ -3161,7 +3150,6 @@ function wireMapsLinks(){
     }, {threshold: 0.05});
 
     io.observe(heroEl);
-
   }else{
     raf = requestAnimationFrame(animate);
   }

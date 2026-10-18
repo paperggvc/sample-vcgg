@@ -264,7 +264,7 @@ p{
 /* Base styling for side elements 1 and 5 */
 .hero-side-decor {
   position: absolute;
-  top: 10px; /* Aligns them right from the top edge of the hero */
+  top: 10px; /* Desktop starting position */
   
   /* Responsive width: smaller on mobile phones, wider on desktops */
   width: clamp(60px, 15vw, 150px); 
@@ -297,11 +297,11 @@ p{
   z-index: 3;
 }
 
-/* MOBILE ADJUSTMENT: Scaled down gracefully so they fit screens without hiding */
+/* MOBILE ADJUSTMENT: Pushed down to line up right above "Save the Date" */
 @media (max-width: 768px) {
   .hero-side-decor {
-    width: clamp(50px, 18vw, 85px); /* Automatically scales down on mobile */
-    top: 5px;
+    width: clamp(48px, 16vw, 80px); /* Slightly refined width for phone screens */
+    top: 55px; /* CHANGED: Increased from 5px to 55px to push graphics down above "Save the Date" */
   }
 }
    

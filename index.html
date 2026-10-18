@@ -214,6 +214,43 @@ p{
   margin-block:clamp(18px,3vw,24px) clamp(22px,4vw,30px);
 }
 
+/* ============================================================
+   GOLDEN GLOWING BUDDHA WIREFRAME
+   ============================================================ */
+
+.buddha-wireframe {
+  width: min(160px, 40vw); /* Medium subtle sizing */
+  margin: 0 auto clamp(20px, 4vw, 32px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buddha-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.75; /* Subtle and soft */
+  
+  /* Gold tint filter & gentle warm glow */
+  filter: 
+    sepia(100%) 
+    hue-rotate(5deg) 
+    saturate(250%) 
+    drop-shadow(0px 0px 8px rgba(183, 154, 103, 0.45));
+    
+  transition: opacity 0.5s ease, filter 0.5s ease;
+}
+
+/* Optional gentle hover enhancement */
+.buddha-wireframe:hover .buddha-img {
+  opacity: 0.95;
+  filter: 
+    sepia(100%) 
+    hue-rotate(5deg) 
+    saturate(300%) 
+    drop-shadow(0px 0px 14px rgba(183, 154, 103, 0.7));
+}
 
 /* ============================================================
    NAVIGATION
@@ -2772,46 +2809,11 @@ fieldset{
      ============================================================ -->
 
 <footer class="footer">
-
   <div class="shell">
 
-
-    <!-- Replace wedding-line-art.png with your own transparent PNG/SVG -->
-    <div
-      class="artwork-placeholder"
-      aria-hidden="true"
-    >
-
-      <img
-        src="images/wedding-line-art.png"
-        alt=""
-      />
-
-    </div>
-
-
-    <div
-      class="motif"
-      aria-hidden="true"
-    >
-
-      <svg
-        viewBox="0 0 188 34"
-        role="presentation"
-      >
-
-        <path class="m-line" d="M0 26 C16 22 28 29 42 26 C52 24 58 25 64 27"/>
-        <path class="m-line" d="M124 27 C130 25 136 24 146 26 C160 29 172 22 188 26"/>
-
-        <path class="m-petal" d="M94 6 C100 12 100 20 94 26 C88 20 88 12 94 6"/>
-        <path class="m-petal" d="M94 26 C85 22 79 14 80 7 C87 10 93 18 94 26"/>
-        <path class="m-petal" d="M94 26 C103 22 109 14 108 7 C101 10 95 18 94 26"/>
-        <path class="m-petal" d="M94 26 C83 27 71 23 67 15 C77 15 89 19 94 26"/>
-        <path class="m-petal" d="M94 26 C105 27 117 23 121 15 C111 15 99 19 94 26"/>
-        <path class="m-petal" d="M84 26 C87 32 101 32 104 26"/>
-
-      </svg>
-
+    <!-- SUBTLE GOLDEN GLOWING BUDDHA WIREFRAME -->
+    <div class="buddha-wireframe" aria-hidden="true">
+      <img src="buddha-wireframe.png" alt="" class="buddha-img" />
     </div>
 
 
@@ -2828,7 +2830,6 @@ fieldset{
     </p>
 
   </div>
-
 </footer>
 
 

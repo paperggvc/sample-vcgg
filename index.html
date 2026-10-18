@@ -388,6 +388,35 @@ p{
   transform:translateY(-7px) rotate(-45deg);
 }
 
+/* ============================================================
+   BOTTOM LEFT FOOTER CORNER ELEMENT
+   ============================================================ */
+
+.footer {
+  position: relative; /* Keeps absolute elements contained within the footer */
+  overflow: hidden;   /* Prevents any image overflow from creating horizontal scrollbars */
+}
+
+.footer-corner-decor {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  
+  /* Responsive sizing so it stays proportional without disturbing layout */
+  width: clamp(80px, 15vw, 180px); 
+  height: auto;
+  
+  object-fit: contain;
+  pointer-events: none; /* Allows user interactions/clicks to pass right through */
+  z-index: 1;            /* Sits underneath the main footer content */
+  opacity: 0.85;         /* Optional: blends subtly into the background */
+}
+
+/* Ensure footer main content shell sits cleanly above the corner decor */
+.footer .shell {
+  position: relative;
+  z-index: 2;
+}
 
 /* ============================================================
    MOBILE NAVIGATION
@@ -2809,6 +2838,12 @@ fieldset{
      ============================================================ -->
 
 <footer class="footer">
+   <!-- Pinned Corner Element -->
+  <img 
+    src="Bottom_left_element.png" 
+    alt="" 
+    class="footer-corner-decor" 
+    aria-hidden="true"
   <div class="shell">
 
     <!-- SUBTLE GOLDEN GLOWING BUDDHA WIREFRAME -->

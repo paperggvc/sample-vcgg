@@ -258,46 +258,50 @@ p{
 
 .hero {
   position: relative;
-  overflow: hidden; /* Keeps side images cleanly bounded */
+  overflow: hidden; /* Keeps the graphics bound inside the hero section */
 }
 
 /* Base styling for side elements 1 and 5 */
 .hero-side-decor {
   position: absolute;
-  top: 30px; /* Aligned near the top around "Save the Date" */
-  width: clamp(75px, 15vw, 160px); /* Responsive sizing */
+  top: 10px; /* Aligns them right from the top edge of the hero */
+  
+  /* Responsive width: smaller on mobile phones, wider on desktops */
+  width: clamp(60px, 15vw, 150px); 
+  
   height: auto;
   object-fit: contain;
-  pointer-events: none; /* Lets clicks pass right through */
+  pointer-events: none; /* Lets clicks pass through */
   z-index: 2; /* Sits above background glow/petals, below text */
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
-/* Image 1 on the Left */
+/* PINNED ABSOLUTELY TO THE EXTREME LEFT EDGE */
 .hero-side-left {
-  left: clamp(10px, 2.5vw, 35px);
+  left: 0; 
 }
 
-/* Image 5 on the Right */
+/* PINNED ABSOLUTELY TO THE EXTREME RIGHT EDGE */
 .hero-side-right {
-  right: clamp(10px, 2.5vw, 35px);
+  right: 0; 
 }
 
-/* Ensure petall/glow layers stay in the backdrop */
+/* Ensure petal/glow layers stay in the backdrop */
 .hero__petals, .hero__glow {
   z-index: 1;
 }
 
-/* Ensure text content stays above graphics */
+/* Ensure text content stays safely above graphics */
 .hero__content {
   position: relative;
   z-index: 3;
 }
 
-/* Automatically hide side graphics on smaller mobile screens to protect readability */
+/* MOBILE ADJUSTMENT: Scaled down gracefully so they fit screens without hiding */
 @media (max-width: 768px) {
   .hero-side-decor {
-    display: none;
+    width: clamp(50px, 18vw, 85px); /* Automatically scales down on mobile */
+    top: 5px;
   }
 }
    

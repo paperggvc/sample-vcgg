@@ -215,6 +215,28 @@ p{
 }
 
 /* ============================================================
+   CENTERED WATER LOTUS DIVIDER STYLING
+   ============================================================ */
+
+.section-lotus-divider {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(20px, 4vw, 40px) 0; /* Adds balanced gap spacing above and below */
+  background: transparent;
+}
+
+.center-lotus-img {
+  width: clamp(70px, 15vw, 130px); /* Medium size: scales nicely from mobile to desktop */
+  height: auto;
+  object-fit: contain;
+  opacity: 0.9;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1)); /* Soft natural shadow */
+}
+   
+/* ============================================================
    GOLDEN GLOWING BUDDHA WIREFRAME
    ============================================================ */
 
@@ -2392,7 +2414,13 @@ fieldset{
 
 </section>
 
-
+<!-- ============================================================
+     CENTERED WATER LOTUS DIVIDER
+     ============================================================ -->
+<div class="section-lotus-divider" aria-hidden="true">
+  <img src="water-lotus.png" alt="" class="center-lotus-img" />
+</div>
+   
 <!-- ============================================================
      LOCATION
      ============================================================ -->

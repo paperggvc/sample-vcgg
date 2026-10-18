@@ -253,6 +253,55 @@ p{
 }
 
 /* ============================================================
+   HERO SIDE ELEMENTS (1 & 5) LAYERING & POSITIONING
+   ============================================================ */
+
+.hero {
+  position: relative;
+  overflow: hidden; /* Keeps side images cleanly bounded */
+}
+
+/* Base styling for side elements 1 and 5 */
+.hero-side-decor {
+  position: absolute;
+  top: 30px; /* Aligned near the top around "Save the Date" */
+  width: clamp(75px, 15vw, 160px); /* Responsive sizing */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none; /* Lets clicks pass right through */
+  z-index: 2; /* Sits above background glow/petals, below text */
+  opacity: 0.9;
+}
+
+/* Image 1 on the Left */
+.hero-side-left {
+  left: clamp(10px, 2.5vw, 35px);
+}
+
+/* Image 5 on the Right */
+.hero-side-right {
+  right: clamp(10px, 2.5vw, 35px);
+}
+
+/* Ensure petall/glow layers stay in the backdrop */
+.hero__petals, .hero__glow {
+  z-index: 1;
+}
+
+/* Ensure text content stays above graphics */
+.hero__content {
+  position: relative;
+  z-index: 3;
+}
+
+/* Automatically hide side graphics on smaller mobile screens to protect readability */
+@media (max-width: 768px) {
+  .hero-side-decor {
+    display: none;
+  }
+}
+   
+/* ============================================================
    NAVIGATION
    ============================================================ */
 
@@ -1911,6 +1960,12 @@ fieldset{
      ============================================================ -->
 
 <section class="hero" id="home">
+
+  <!-- Left Side Element (Image 1) -->
+  <img src="1.png" alt="" class="hero-side-decor hero-side-left" aria-hidden="true" />
+
+  <!-- Right Side Element (Image 5) -->
+  <img src="5.png" alt="" class="hero-side-decor hero-side-right" aria-hidden="true" />
 
   <div class="hero__glow" aria-hidden="true"></div>
 

@@ -3255,22 +3255,8 @@ function wireMapsLinks(){
     }).observe(container);
   }
 
-  if("IntersectionObserver" in window){
-    const heroEl = document.querySelector(".hero");
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          if(!raf) raf = requestAnimationFrame(animate);
-        }else{
-          if(raf){ cancelAnimationFrame(raf); raf = null; }
-        }
-      });
-    }, {threshold: 0.05});
-
-    io.observe(heroEl);
-  }else{
-    raf = requestAnimationFrame(animate);
-  }
+ // Start animation immediately for full iOS Safari compatibility
+  raf = requestAnimationFrame(animate);
 
 })();
 

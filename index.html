@@ -3149,7 +3149,7 @@ function wireMapsLinks(){
   const container =
     document.getElementById("heroPetals");
 
-  if(!container || reduceMotion) return;
+  if(!container) return;
 
   // --- CHANGED: Use window inner dimensions directly to avoid 0-height issues behind iOS overlays ---
   let W = window.innerWidth;

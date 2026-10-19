@@ -3144,14 +3144,6 @@ function wireMapsLinks(){
 }
 
 
-/* ============================================================
-   PETALS — Safari-compatible JavaScript animation
-   Uses requestAnimationFrame for cross-browser reliability.
-   Number controlled by PETAL_COUNT (config above).
-   Colours from CSS variables --petal-color-1/2/3.
-   Clipped to #heroPetals which is inside .hero (overflow:hidden).
-   ============================================================ */
-
 (function heroPetals(){
 
   const container =
@@ -3159,9 +3151,9 @@ function wireMapsLinks(){
 
   if(!container || reduceMotion) return;
 
-  const rect = container.getBoundingClientRect();
-  let W = rect.width || window.innerWidth;
-  let H = rect.height || window.innerHeight;
+  // --- CHANGED: Use window inner dimensions directly to avoid 0-height issues behind iOS overlays ---
+  let W = window.innerWidth;
+  let H = window.innerHeight;
 
   const colors = [
     getComputedStyle(document.documentElement)
@@ -3195,7 +3187,8 @@ function wireMapsLinks(){
     petals.push({
       el,
       x: Math.random() * W,
-      y: -h * 2 - Math.random() * 100,
+      // --- CHANGED: Spread initial positions across the screen height so they don't all stack at the top ---
+      y: Math.random() * H - H,
       speed: Math.random() * 0.6 + 0.25,
       drift: (Math.random() - 0.5) * 0.4,
       rot: Math.random() * 360,
@@ -3210,10 +3203,9 @@ function wireMapsLinks(){
 
   function animate(){
 
-    // Fallback checks added here for mobile viewport safety
-    const r = container.getBoundingClientRect();
-    W = r.width || window.innerWidth;
-    H = r.height || window.innerHeight;
+    // --- CHANGED: Continuously update screen bounds dynamically on iOS rotation/resize ---
+    W = window.innerWidth;
+    H = window.innerHeight;
 
     for(const p of petals){
 
@@ -3247,15 +3239,8 @@ function wireMapsLinks(){
     raf = requestAnimationFrame(animate);
   }
 
-  if(typeof ResizeObserver !== "undefined"){
-    new ResizeObserver(() => {
-      const r = container.getBoundingClientRect();
-      W = r.width || window.innerWidth;
-      H = r.height || window.innerHeight;
-    }).observe(container);
-  }
-
- // Start animation immediately for full iOS Safari compatibility
+  // --- REMOVED: ResizeObserver and IntersectionObserver are completely stripped out ---
+  // --- CHANGED: Kick off the animation loop immediately and unconditionally for iOS Safari ---
   raf = requestAnimationFrame(animate);
 
 })();
